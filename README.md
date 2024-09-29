@@ -9,6 +9,6 @@ Currently, two official plugins are available:
 For running the Application
 
 1. install dependencies:
-- npm install
-2 .Run the code:
-- npm run dev
+   - npm install
+2 . Run the code:
+  - npm run dev
