@@ -1,0 +1,13 @@
+.banner-container {
+  padding-top: 70px; /* Adjust this value as needed based on your navbar's height */
+}
+
+.banner-image {
+  max-height: 600px;
+  object-fit: cover;
+}
+
+.banner-image-container {
+  position: relative;
+  overflow: hidden;
+}
