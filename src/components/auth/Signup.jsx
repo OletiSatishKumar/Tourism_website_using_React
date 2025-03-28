@@ -23,7 +23,7 @@ const Signup = () => {
         <h2 className="text-2xl font-bold text-center text-gray-800">Sign Up</h2>
         <form onSubmit={handleSubmit} className="mt-6">
           <div>
-            <label className="block text-gray-700">Full Name</label>
+            <label className="block text-gray-700">Your Name</label>
             <input
               type="text"
               name="name"
