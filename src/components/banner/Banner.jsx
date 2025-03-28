@@ -14,7 +14,7 @@ function Banner() {
             />
           </div>
           <Carousel.Caption>
-             <h1>Araku Valley</h1> {/* Nature place title */}
+             <h1>Araku Valley (feels like a Haven) </h1> {/* Nature place title */}
             <p>Beautiful hill station located in the Eastern Ghats of India, known for its lush green forests and coffee plantations.</p>
           </Carousel.Caption>
         </Carousel.Item>
