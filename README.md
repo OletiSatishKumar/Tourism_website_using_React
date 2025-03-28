@@ -1,4 +1,4 @@
-## 🚀 Running the Application
+## 🚀 Running the Tourism Web Application
 
 Follow the steps below to install dependencies and start the application:
 
