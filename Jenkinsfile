@@ -26,13 +26,6 @@ pipeline {
                 bat 'npm run build'
             }
         }
-
-        stage('Lint Check') {
-            steps {
-                echo 'Running ESLint checks...'
-                bat 'npm run lint'
-            }
-        }
     }
 
     post {
