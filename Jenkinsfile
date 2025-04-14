@@ -8,8 +8,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                echo 'Cloning the repository...'
-                git 'https://github.com/OletiSatishKumar/Tourism_website_using_React.git'
+                echo 'Cloning the repository (main branch)...'
+                git branch: 'master', url: 'https://github.com/OletiSatishKumar/Tourism_website_using_React.git'
             }
         }
 
