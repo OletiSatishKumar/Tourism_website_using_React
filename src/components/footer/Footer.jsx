@@ -42,6 +42,7 @@ const Footer = () => {
             <p className="text-muted" style={{ fontSize: "1rem", lineHeight: "1.5" }}>
               Discover the best places to explore, enjoy, and relax. Join us as we
               share insights and stories of wonderful destinations.
+              Start your journey with us today and turn your travel dreams into reality!
             </p>
             <div className="d-flex align-items-center gap-2 mt-4">
               <FaLocationArrow className="text-dark" />
