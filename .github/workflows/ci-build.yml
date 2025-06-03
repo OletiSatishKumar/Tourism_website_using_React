@@ -30,7 +30,7 @@ jobs:
       - name: Set image tag and repo name
         id: vars
         run: |
-          if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
+          if [[ "${{ github.ref }}" == "refs/heads/master" ]]; then
             echo "tag=prod-latest" >> $GITHUB_OUTPUT
           else
             echo "tag=dev-latest" >> $GITHUB_OUTPUT
@@ -52,15 +52,17 @@ jobs:
           git clone https://x-access-token:${{ secrets.GIT_TKN }}@github.com/${{ env.GH_INFRA_REPO }}.git infra-repo
           cd infra-repo/charts/react
 
-          if [[ "${{ steps.vars.outputs.tag }}" == "prod-latest" ]]; then
-            sed -i 's|tag: .*|tag: prod-latest|' values-prod.yaml
+          TAG=${{ steps.vars.outputs.tag }}
+
+          if [[ "$TAG" == "prod-latest" ]]; then
+            sed -i 's|^\(\s*tag:\s*\).*|\1'"$TAG"'|' values-prod.yaml
           else
-            sed -i 's|tag: .*|tag: dev-latest|' values-dev.yaml
+            sed -i 's|^\(\s*tag:\s*\).*|\1'"$TAG"'|' values-dev.yaml
           fi
 
           if ! git diff --quiet; then
             git add .
-            git commit -m "Update image tag to ${{ steps.vars.outputs.tag }} [CI]"
+            git commit -m "Update image tag to $TAG [CI]"
             git push
           else
             echo "No changes to commit."
