@@ -50,7 +50,7 @@ jobs:
           git config --global user.name "github-actions"
 
           git clone https://x-access-token:${{ secrets.GIT_TKN }}@github.com/${{ env.GH_INFRA_REPO }}.git infra-repo
-          cd infra-repo/charts/react-vite
+          cd infra-repo/charts/react
 
           if [[ "${{ steps.vars.outputs.tag }}" == "prod-latest" ]]; then
             sed -i 's|tag: .*|tag: prod-latest|' values-prod.yaml
