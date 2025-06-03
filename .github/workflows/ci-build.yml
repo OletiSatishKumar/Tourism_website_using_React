@@ -54,11 +54,19 @@ jobs:
 
           TAG=${{ steps.vars.outputs.tag }}
 
+          echo "Before updating tag:"
+          cat values-prod.yaml
+          cat values-dev.yaml
+
           if [[ "$TAG" == "prod-latest" ]]; then
             sed -i 's|^\(\s*tag:\s*\).*|\1'"$TAG"'|' values-prod.yaml
           else
             sed -i 's|^\(\s*tag:\s*\).*|\1'"$TAG"'|' values-dev.yaml
           fi
+
+          echo "After updating tag:"
+          cat values-prod.yaml
+          cat values-dev.yaml
 
           if ! git diff --quiet; then
             git add .
