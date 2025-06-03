@@ -61,3 +61,4 @@ jobs:
           {
             "image": "${{ env.DOCKER_IMAGE }}:${{ steps.vars.outputs.tag }}"
           }
+           ref: refs/heads/master
