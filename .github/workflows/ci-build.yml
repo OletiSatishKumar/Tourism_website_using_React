@@ -27,7 +27,7 @@ jobs:
           username: ${{ secrets.DOCKER_USERNAME }}
           password: ${{ secrets.DOCKER_PASSWORD }}
 
-      - name: Set image tag based on branch
+      - name: Set image tag and repo name
         id: vars
         run: |
           if [[ "${{ github.ref }}" == "refs/heads/main" ]]; then
@@ -35,7 +35,9 @@ jobs:
           else
             echo "tag=dev-latest" >> $GITHUB_OUTPUT
           fi
-          echo "repo_name=${DOCKER_USER}/${{ github.event.repository.name }}" >> $GITHUB_OUTPUT
+
+          repo_name="${DOCKER_USER}/$(echo "${{ github.event.repository.name }}" | tr '[:upper:]' '[:lower:]')"
+          echo "repo_name=$repo_name" >> $GITHUB_OUTPUT
 
       - name: Build and push Docker image
         run: |
