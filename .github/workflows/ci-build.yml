@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master
+      - dev
 
 jobs:
   build:
@@ -50,22 +51,13 @@ jobs:
           ${{ env.DOCKER_IMAGE }}:latest
           ${{ env.DOCKER_IMAGE }}:${{ steps.vars.outputs.tag }}
 
-    - name: Clone Infra Repository
-      uses: actions/checkout@v3
+    - name: Trigger Infra Repo Workflow
+      uses: peter-evans/repository-dispatch@v3
       with:
-        repository: OletiSatishKumar/Tourism_website_Infra
         token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
-        path: infra
-
-    - name: Update image tag in deployment.yaml
-      run: |
-        sed -i "s|image:.*|image: ${DOCKER_IMAGE}:${{ steps.vars.outputs.tag }}|" infra/k8s/deployment.yaml
-
-    - name: Commit and Push Updated Manifest
-      run: |
-        cd infra
-        git config user.name "github-actions"
-        git config user.email "github-actions@github.com"
-        git add k8s/deployment.yaml
-        git commit -m "Update image tag to ${{ steps.vars.outputs.tag }}"
-        git push
+        repository: OletiSatishKumar/Tourism_website_Infra
+        event-type: update-values
+        client-payload: |
+          {
+            "image": "${{ env.DOCKER_IMAGE }}:${{ steps.vars.outputs.tag }}"
+          }
